@@ -2,13 +2,13 @@ import "./App.css";
 import "./index.css";
 import { Fragment, useState } from "react";
 import MovieList from "./component/MovieList";
-
+import Movie from "./component/Movie";
 import Navbar from "./component/Navbar";
 import Search from "./component/Search";
-
+import { Routes, Route } from "react-router-dom";
 import AddMovie from "./component/AddMovie";
-import { Container } from "react-bootstrap";
-const moviesData = [
+
+export const moviesData = [
   {
     id: 1,
     title: "Frozen",
@@ -18,6 +18,7 @@ const moviesData = [
       "https://www.geox.com/on/demandware.static/-/Library-Sites-geoxSharedLibrary/default/dw3dddd44c/landing-editoriali/Frozen_Refresh/M-editorial-focus.jpg",
     //
     rating: 5,
+    trailer: "https://www.youtube.com/embed/TbQm5doF_Uc",
   },
 
   {
@@ -28,6 +29,7 @@ const moviesData = [
     posterURL: "https://m.media-amazon.com/images/I/51sPEaO-5cL._AC_.jpg",
 
     rating: 4,
+    trailer: "https://www.youtube.com/embed/wCxuxrLNrsw",
   },
 
   {
@@ -38,6 +40,7 @@ const moviesData = [
     posterURL: "https://media.s-bol.com/x7zxzqvwEPLE/gZGqzVr/550x722.jpg",
 
     rating: 4,
+    trailer: "https://www.youtube.com/embed/eTjHiQKJUDY",
   },
   {
     id: 4,
@@ -48,6 +51,7 @@ const moviesData = [
       " https://www.cartonionline.com/wordpress/wp-content/uploads/2021/10/7ea88dd3-e603-9040-7580-6c2560a580ca1.jpg",
 
     rating: 5,
+    trailer: "https://www.youtube.com/embed/CaimKeDcudo",
   },
   {
     id: 5,
@@ -58,6 +62,7 @@ const moviesData = [
       "https://images.moviesanywhere.com/f95f804467439ccffaddb406e9bd7e33/9cc6a3c0-0bba-4637-82b7-90fc1f6b1fa1.jpg",
 
     rating: 4,
+    trailer: "https://www.youtube.com/embed/mYfJxlgR2jw",
   },
   {
     id: 6,
@@ -68,6 +73,7 @@ const moviesData = [
       "https://lumiere-a.akamaihd.net/v1/images/p_cinderella_20490_a7c83808.jpeg?region=0%2C0%2C540%2C810",
 
     rating: 3,
+    trailer: "https://www.youtube.com/embed/7UNEY2MgY_s",
   },
   {
     id: 7,
@@ -77,6 +83,7 @@ const moviesData = [
     posterURL: "https://imgsrc.cineserie.com/2020/09/1615761.jpg?ver=1",
 
     rating: 3,
+    trailer: "https://www.youtube.com/embed/fl3uIAPfUmk",
   },
   {
     id: 8,
@@ -87,6 +94,7 @@ const moviesData = [
       "https://i.scdn.co/image/ab67616d0000b27380267288bf73e6258b6d6db1",
 
     rating: 5,
+    trailer: "https://www.youtube.com/embed/iurbZwxKFUE",
   },
 ];
 
@@ -99,30 +107,42 @@ function App() {
   return (
     <Fragment>
       <Navbar />
-      <div className="d-flex bd-highlight">
-        <div className="p-2 w-100 bd-highlight">
-          <Search
-            ratingSearch={ratingSearch}
-            setRatingSearch={setRatingSearch}
-            setSearch={setNameSearch}
-          />
-        </div>
-        <div className="p-2 flex-shrink-1 bd-highlight">
-          <AddMovie addNewMovie={addNewMovie} />
-        </div>
-      </div>
-      <MovieList
-        moviesData={moviesData}
-        moviesList={moviesData.filter(
-          (el) =>
-            el.title.toLowerCase().includes(nameSearch.toLowerCase().trim()) &&
-            el.rating === ratingSearch
-        )}
-      />
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <div className="d-flex bd-highlight">
+                <div className="p-2 w-100 bd-highlight">
+                  <Search
+                    ratingSearch={ratingSearch}
+                    setRatingSearch={setRatingSearch}
+                    setSearch={setNameSearch}
+                  />
+                </div>
+                <div className="p-2 flex-shrink-1 bd-highlight">
+                  <AddMovie addNewMovie={addNewMovie} />
+                </div>
+              </div>
+              <MovieList
+                moviesData={moviesData}
+                moviesList={moviesData.filter(
+                  (el) =>
+                    el.title
+                      .toLowerCase()
+                      .includes(nameSearch.toLowerCase().trim()) &&
+                    el.rating === ratingSearch
+                )}
+              />
+            </div>
+          }
+        />
+
+        <Route path="/Movie/:id" element={<Movie moviesData={moviesData} />} />
+      </Routes>
     </Fragment>
   );
 }
 
 export default App;
-/*posterURL :https://static.pointculture.be/media/b3/8c/60/cover_ys4898_scale_345x750.jpg
-description:Snow White, pursued by the jealousy of the evil queen, takes refuge with the dwarves of the forest. But the queen, transformed into a witch, discovers her and succeeds in making her eat a poisoned apple. The dwarves believe their friend dead and keep her in a glass coffin */

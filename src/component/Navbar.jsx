@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
 const Navbar = ({}) => {
   const [title, setTitle] = useState(["Kids Movies"]);
   return (
@@ -25,14 +25,9 @@ const Navbar = ({}) => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#!">
+              <Link to="/" className="nav-link active" aria-current="page">
                 Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#!">
-                Features
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

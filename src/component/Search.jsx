@@ -11,8 +11,8 @@ const Search = ({ setSearch, ratingSearch, setRatingSearch }) => {
 
   return (
     <div className="container" style={{ paddingBottom: 100, paddingTop: 50 }}>
-      <div className="row justify-content-md-center">
-        <div className="col col-lg-2">
+      <div className="row justify-content-evenly">
+        <div className="col-4">
           <input
             type="text"
             value={text}
@@ -25,7 +25,7 @@ const Search = ({ setSearch, ratingSearch, setRatingSearch }) => {
             }}
           />
         </div>
-        <div className="col-md-auto">
+        <div className="col-4">
           <Rating rating={ratingSearch} setRatingSearch={setRatingSearch} />
         </div>
       </div>

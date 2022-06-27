@@ -1,47 +1,47 @@
 import React from "react";
 import Rating from "./Rating";
 
-const MovieCard = ({ movie: { title, description, posterURL, rating } }) => {
+import { Link } from "react-router-dom";
+
+const MovieCard = ({
+  movie: { id, title, description, posterURL, rating },
+}) => {
   console.log(title, description, posterURL, rating);
   return (
-    <div className="  mb-3 " style={{ maxWidth: 540, paddingBottom: 50 }}>
-      <div className="row g-0 ">
-        <div className="col-md-4">
-          <img
-            src={posterURL}
-            className="img-fluid rounded-start"
-            alt="..."
-            style={{ height: 400, objectFit: "cover" }}
-          />
-        </div>
-        <div className="col-md-8 col-dark ">
-          <div
-            className="card-body "
-            style={{
-              backgroundColor: "purple",
-              height: 400,
-            }}
-          >
-            <h3 className="card-title" style={{ color: "white" }}>
-              {title}{" "}
-            </h3>
-            <p className="card-text" style={{ color: "white" }}>
-              {description}
-            </p>
-            {/* <p className="card-text "> */}
-            <small className="text-muted">
-              <Rating rating={rating} />
-            </small>
-            {/* </p> */}
-            <div className="text-end flex">
-              <a
-                href="#"
-                className="btn btn-dark "
-                style={{ backgroundColor: " Indigo" }}
+    <div style={{ maxWidth: 300, paddingBottom: 50 }}>
+      <div className="card">
+        <img
+          src={posterURL}
+          className="card-img-top"
+          alt="..."
+          style={{ height: 400, objectFit: "cover" }}
+        />
+
+        <div
+          className="card-body "
+          style={{
+            backgroundColor: "purple",
+          }}
+        >
+          <h4 className="card-title" style={{ color: "white" }}>
+            {title}{" "}
+          </h4>
+
+          {/* <p className="card-text "> */}
+          <small className="text-muted">
+            <Rating rating={rating} />
+          </small>
+          <div className="text-end  mt-auto">
+            <Link to={`/Movie/${id}`}>
+              <button
+                className="btn  btn-dark"
+                style={{
+                  backgroundColor: "indigo",
+                }}
               >
-                More
-              </a>
-            </div>
+                For More{" "}
+              </button>
+            </Link>
           </div>
         </div>
       </div>
